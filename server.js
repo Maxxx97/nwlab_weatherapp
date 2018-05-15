@@ -14,6 +14,17 @@ server.get('/',(req,res)=>{
   res.render('main.hbs');
 });
 
+server.get('/main',(req,res)=>{
+  res.render('main.hbs');
+});
+
+server.get('/results',(req,res)=>{
+  res.render('results.hbs');
+});
+
+server.post('/form',(req,res) => {
+  res.render('form.hbs');
+});
 server.post('/getweather',(req,res) =>{
   const addr = req.body.address;
   const locationReq =`https://maps.googleapis.com/maps/api/geocode/json?address=${addr}&key=AIzaSyA9HmIKh3Yv-T9zS_JxjMZb8ZpEOpq7AtQ`;
@@ -26,13 +37,14 @@ server.post('/getweather',(req,res) =>{
     return axios.get(weatherReq);
 
   }).then((response) =>{
-    res.send(
-    {
-      address: addr,
-      summary:response.data.currently.summary,
-      temperature:(response.data.currently.temperature -32)*0.5556,
-    }
-  );
+
+
+  res.render('results.hbs',{
+    address: addr,
+    summary:response.data.currently.summary,
+    temperature:(response.data.currently.temperature -32)*0.5556,
+  });
+
     console.log(response.data.currently.summary);
     const temp =(response.data.currently.temperature -32)*0.5556;
     const temperature = temp.toFixed(2);
