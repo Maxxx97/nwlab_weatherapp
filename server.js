@@ -27,7 +27,16 @@ return out;
 });
 
 //-- fix favicon.ico error  on heroku ---
-server.get('/favicon.ico', (req, res) => res.status(204));
+function ignoreFavicon(req, res, next) {
+  if (req.originalUrl === '/favicon.ico') {
+    res.status(204).json({nope: true});
+  } else {
+    next();
+  }
+}
+
+server.use(ignoreFavicon);
+
 
 server.get('/',(req,res)=>{
   res.render('main.hbs');
