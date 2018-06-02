@@ -1,4 +1,4 @@
-const {MongoClient} = require('mongoDB');
+const {MongoClient} = require('mongodb');
 const fs = MongoClient;
 
 const database = 'mongodb://localhost:27017';
