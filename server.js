@@ -7,6 +7,7 @@ const filemgr = require('./filemgr');
 
 const port = process.env.PORT || 3000;
 
+//command
 server.use(bodyParser.urlencoded({extended:true}));
 
 server.set('view engine','hbs');
