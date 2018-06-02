@@ -7,7 +7,6 @@ const filemgr = require('./filemgr');
 
 const port = process.env.PORT || 3000;
 
-//command
 server.use(bodyParser.urlencoded({extended:true}));
 
 server.set('view engine','hbs');
@@ -26,6 +25,9 @@ for(var i=0; i<length; i++){
 
 return out;
 });
+
+//-- fix favicon.ico error  on heroku ---
+server.get('/favicon.ico', (req, res) => res.status(204));
 
 server.get('/',(req,res)=>{
   res.render('main.hbs');
